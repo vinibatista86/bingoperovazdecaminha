@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sorteador - Carta de Caminha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #painel {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            min-height: 100px;
+        }
+        .sorteado {
+            margin: 5px;
+            padding: 5px;
+            background-color: #f0f0f0;
+            display: inline-block;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorteador de Expressões da Carta de Caminha</h1>
+    <button onclick="sortear()">Sortear Expressão</button>
+    <button onclick="reiniciar()">Reiniciar Sorteio</button>
+    <h2>Expressões já sorteadas:</h2>
+    <div id="painel"></div>
+
+    <script>
+        const expressoes = [
+            'aformosentar', '21 dias de abril', 'Terra de Vera Cruz',
+            'pardos', 'avermelhados', 'Andam nus',
+            'encobrir suas vergonhas', 'inocência', 'beiço de baixo furado',
+            'sinal de cortesia', 'ouro na terra', 'castiçal de prata',
+            'bicos de osso', 'quartejados de cores', 'novinhas e gentis',
+            'não lavram, nem criam', 'inhame', 'tão rijos e tão nédios',
+            'seriam logo cristãos', 'crença alguma', 'degredados',
+            'gente é boa e de bela simplicidade', 'convertidos',
+            'bons ares frescos e temperados', 'Águas são muitas; infinitas',
+            'dar-se-á nela tudo', 'fruto', 'salvar esta gente',
+            'semente', 'miúdo'
+        ];
+        
+        let expressoesSorteadas = [];
+        
+        function sortear() {
+            if (expressoesSorteadas.length === expressoes.length) {
+                alert('Todas as expressões já foram sorteadas!');
+                return;
+            }
+            
+            let expressaoSorteada;
+            do {
+                const indice = Math.floor(Math.random() * expressoes.length);
+                expressaoSorteada = expressoes[indice];
+            } while (expressoesSorteadas.includes(expressaoSorteada));
+            
+            expressoesSorteadas.push(expressaoSorteada);
+            
+            const painel = document.getElementById('painel');
+            const novaExpressao = document.createElement('div');
+            novaExpressao.className = 'sorteado';
+            novaExpressao.textContent = expressaoSorteada;
+            painel.appendChild(novaExpressao);
+        }
+
+        function reiniciar() {
+            expressoesSorteadas = [];
+            const painel = document.getElementById('painel');
+            painel.innerHTML = '';
+        }
+    </script>
+</body>
+</html>
